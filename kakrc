@@ -15,6 +15,28 @@ try %{
 }
 
 
+plug 'kak-lsp/kak-lsp' config %{
+	cargo install --locked --force --path .
+	evaluate-commands %sh{kak-lsp --kakoune -s $kak_session}
+	lsp-enable
+}
+
+
+# ==============================================================================
+# SETTINGS
+# ==============================================================================
+
+#hook global WinCreate .* addhl show-whitespaces
+
+# Highlight trailing whitspace
+add-highlighter global/show-trailing-whitespace regex '\h+$' 0:Error
+
+set-option global tabstop 4
+set-option global indentwidth 0
+
+set global scrolloff '3,7'
+
+
 # ==============================================================================
 # MAPPINGS
 # ==============================================================================
