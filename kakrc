@@ -23,13 +23,32 @@ plug 'kak-lsp/kak-lsp' config %{
 
 
 # ==============================================================================
-# SETTINGS
+# COLORS
 # ==============================================================================
 
-#hook global WinCreate .* addhl show-whitespaces
+set-face global Default 'rgb:d0d0d0,rgb:101010'
+
+add-highlighter global/ number-lines -separator '│ '
+set-face global LineNumbers 'rgb:505050,default'
+
+# Whitepace characters
+# https://discuss.kakoune.com/t/see-unwanted-characters/843
+
+add-highlighter global/ show-whitespaces
+#set-face global Whitespace 'rgb:505050,rgb:303030'
+set-face global Whitespace 'default,default'
 
 # Highlight trailing whitspace
-add-highlighter global/show-trailing-whitespace regex '\h+$' 0:Error
+hook global WinSetOption filetype=.* %{
+	add-highlighter window/trailing-whitespace regex '\h+$' 0:Error
+	add-highlighter window/newline regex '\n+' "0:rgb:505050"
+	add-highlighter window/whitespace regex '\h+' "0:rgb:505050"
+}
+
+
+# ==============================================================================
+# SETTINGS
+# ==============================================================================
 
 set-option global tabstop 4
 set-option global indentwidth 0
