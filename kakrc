@@ -21,28 +21,36 @@ plug 'kak-lsp/kak-lsp' config %{
 	lsp-enable
 }
 
+# TODO: https://github.com/enricozb/tabs.kak
+
 
 # ==============================================================================
 # COLORS
 # ==============================================================================
 
+# Line numbers
 set-face global Default 'rgb:d0d0d0,rgb:101010'
+add-highlighter global/ number-lines \
+	-separator '│ '                  \
+	-relative                        \
+	-hlcursor                        \
+	-min-digits 3
+set-face global LineNumbers 'rgb:606060,default'
+set-face global LineNumbersWrapped 'rgb:303030,default'
+set-face global LineNumberCursor 'yellow,default'
 
-add-highlighter global/ number-lines -separator '│ '
-set-face global LineNumbers 'rgb:505050,default'
-
-# Whitepace characters
+# Show whitepace characters
 # https://discuss.kakoune.com/t/see-unwanted-characters/843
+add-highlighter global/ show-whitespaces \
+	-lf '⇣'                              \
+	-spc '·'                             \
+	-tab '▸'
+set-face global Whitespace 'rgb:505050,default'
 
-add-highlighter global/ show-whitespaces
-#set-face global Whitespace 'rgb:505050,rgb:303030'
-set-face global Whitespace 'default,default'
-
-# Highlight trailing whitspace
 hook global WinSetOption filetype=.* %{
 	add-highlighter window/trailing-whitespace regex '\h+$' 0:Error
-	add-highlighter window/newline regex '\n+' "0:rgb:505050"
-	add-highlighter window/whitespace regex '\h+' "0:rgb:505050"
+	add-highlighter window/newline regex '\n+' "0:Whitespace"
+	add-highlighter window/whitespace regex '\h+' "0:Whitespace"
 }
 
 
@@ -57,15 +65,22 @@ set global scrolloff '3,7'
 
 
 # ==============================================================================
-# MAPPINGS
+# ALIASES/COMMANDS
 # ==============================================================================
 
-# jj to exit
-hook global InsertChar j %{ try %{
-	exec -draft hH <a-k>jj<ret> d
-	exec <esc>
-}}
+alias global bd delete-buffer
 
-# <ret> to open command prompt
-map global normal <ret> :
+#define-command -params 1 -file-completion -docstring 'executes mkdir -p' mkdir %{
+#	nop %sh{ mkdir -p "$1" }
+#}
+define-command do %{ eval %val{selection} }
+
+
+# ==============================================================================
+# MAPPINGS
+# ==============================================================================
+#debug mappings
+source "%val{config}/mappings.kak"
+
+
 
