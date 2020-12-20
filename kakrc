@@ -33,11 +33,11 @@ plug 'delapouite/kakoune-palette'
 declare-option str 'black'  'rgb:282a36'
 declare-option str 'gray'   'rgb:44475a'
 declare-option str 'white'  'rgb:f8f8f2'
-declare-option str 'red'    'rgb:ff5555'
+declare-option str 'red'    'rgb:ff8080'
 declare-option str 'orange' 'rgb:ffb060'
 declare-option str 'yellow' 'rgb:f0f090'
 declare-option str 'green'  'rgb:50f080'
-declare-option str 'blue'   'rgb:6272a4'
+declare-option str 'blue'   'rgb:9090f0'
 declare-option str 'cyan'   'rgb:90f0f0'
 declare-option str 'purple' 'rgb:c090f0'
 declare-option str 'pink'   'rgb:ff79c6'
@@ -46,25 +46,29 @@ declare-option str 'pink'   'rgb:ff79c6'
 set-face global Default 'rgb:d0d0d0,rgb:101010'
 
 set-face global attribute "%opt{green}"
+# echo
+set-face global builtin   "%opt{blue}+b"
 set-face global comment   'rgb:707070'
 set-face global keyword   "%opt{cyan}"
+# #include <...>
+set-face global meta      "%opt{cyan}"
 set-face global operator  "%opt{orange}"
 set-face global string    "%opt{yellow}"
 set-face global value     "%opt{green}"
+set-face global variable  "%opt{red}"
 set-face global type      "%opt{purple}"
 
-#set-face global builtin "%opt{white}+b"
+set-face global MatchingChar "%opt{orange}"
+
 #set-face global function "%opt{red}"
-#set-face global meta "%opt{red}"
 #set-face global module "%opt{red}"
-#set-face global variable "%opt{red}"
 
-# Menu/Completion
-set-face global MenuForeground "rgb:404040,%opt{yellow}"
-set-face global MenuBackground "%opt{yellow},rgb:404040"
-set-face global MenuInfo "%opt{yellow},rgb:404040"
+# Menu/completion
+set-face global MenuForeground "rgb:606060,%opt{yellow}"
+set-face global MenuBackground "%opt{yellow},rgb:606060"
+set-face global MenuInfo       "%opt{yellow},rgb:606060"
 
-# Assistant
+# Assistant/[+]
 set-face global Information "%opt{green},rgb:404040"
 
 # Line numbers
@@ -73,9 +77,9 @@ add-highlighter global/ number-lines \
 	-relative                        \
 	-hlcursor                        \
 	-min-digits 3
-set-face global LineNumbers 'rgb:505050,default'
+set-face global LineNumbers        'rgb:505050,default'
 set-face global LineNumbersWrapped 'rgb:202020,default'
-set-face global LineNumberCursor "%opt{yellow},default"
+set-face global LineNumberCursor   "%opt{yellow},default"
 
 # Show whitepace characters
 # https://discuss.kakoune.com/t/see-unwanted-characters/843
@@ -90,6 +94,9 @@ hook global WinSetOption filetype=.* %{
 	add-highlighter window/newline regex '\n+' "0:Whitespace"
 	add-highlighter window/whitespace regex '\h+' "0:Whitespace"
 }
+
+# EOF tildas
+set-face global BufferPadding 'rgb:505050,default'
 
 
 # ==============================================================================
@@ -119,4 +126,6 @@ define-command do %{ eval %val{selection} }
 # ==============================================================================
 #debug mappings
 source "%val{config}/mappings.kak"
+source "%val{config}/user-modes.kak"
+
 

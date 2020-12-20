@@ -1,28 +1,18 @@
 
-
-# ==============================================================================
-# ALT USER-MODE
-# ==============================================================================
-declare-user-mode alt
-map global normal a ': enter-user-mode alt<ret>'
-evaluate-commands %sh{
-	printf "evaluate-commands %%{\n"
-	for key in {a..z}; do
-		printf "map global alt $key '<a-$key>' -docstring '<a-$key>'\n"
-		printf "map global alt ${key^} '<a-${key^}>' -docstring '<a-${key^}>'\n"
-	done
-	printf "}\n"
-}
-
-
 # ==============================================================================
 # NORMAL
 # ==============================================================================
 # <ret> to open command prompt
 map global normal <ret> :
 
+# Comments
 map global normal '#' ': comment-line<ret>' -docstring 'comment line'
+map global normal '^' 's^<ret>'
 
+# Macros
+# Swap 'Q' and 'q' so I don't accidentally run a macro
+map global normal q Q
+map global normal Q q
 
 # Unable to map <c-j>
 # https://discuss.kakoune.com/t/arbitrary-keymaps-vs-terminals/942
@@ -47,6 +37,6 @@ exec -draft hH <a-k>jj<ret> d
 # ==============================================================================
 # VIEW
 # ==============================================================================
-map global view 'q' '<esc>'
+map global view q '<esc>'
 
 
