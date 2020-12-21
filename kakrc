@@ -30,9 +30,9 @@ plug 'delapouite/kakoune-palette'
 # COLORS
 # ==============================================================================
 # Color palette
-declare-option str 'black'  'rgb:282a36'
-declare-option str 'gray'   'rgb:44475a'
-declare-option str 'white'  'rgb:f8f8f2'
+declare-option str 'black'  'rgb:181818'
+declare-option str 'gray'   'rgb:505050'
+declare-option str 'white'  'rgb:f0f0f0'
 declare-option str 'red'    'rgb:ff8080'
 declare-option str 'orange' 'rgb:ffb060'
 declare-option str 'yellow' 'rgb:f0f090'
@@ -43,7 +43,7 @@ declare-option str 'purple' 'rgb:c090f0'
 declare-option str 'pink'   'rgb:ff79c6'
 
 # Builtin faces
-set-face global Default 'rgb:d0d0d0,rgb:101010'
+set-face global Default "%opt{white},%opt{black}"
 
 set-face global attribute "%opt{green}"
 # echo
@@ -63,6 +63,18 @@ set-face global MatchingChar "%opt{orange}"
 #set-face global function "%opt{red}"
 #set-face global module "%opt{red}"
 
+# Markup
+# set-face global title "%opt{red}+b"
+set-face global header "%opt{yellow}+b"
+# set-face global italic "%opt{green}"
+# set-face global bold "%opt{green}"
+set-face global mono "%opt{green}"
+set-face global block "%opt{green}"
+set-face global link "%opt{purple}"
+set-face global bullet "%opt{orange}"
+set-face global list "%opt{orange}+b"
+
+
 # Menu/completion
 set-face global MenuForeground "rgb:606060,%opt{yellow}"
 set-face global MenuBackground "%opt{yellow},rgb:606060"
@@ -72,6 +84,7 @@ set-face global MenuInfo       "%opt{yellow},rgb:606060"
 set-face global Information "%opt{green},rgb:404040"
 
 # Line numbers
+# :addhl window wrap
 add-highlighter global/ number-lines \
 	-separator '│ '                  \
 	-relative                        \
@@ -97,6 +110,15 @@ hook global WinSetOption filetype=.* %{
 
 # EOF tildas
 set-face global BufferPadding 'rgb:505050,default'
+
+# Current row
+# https://github.com/insipx/kak-crosshairs/blob/master/crosshairs.kak
+set-face global line 'default,rgb:303030+bd'
+define-command -hidden highlight-line -docstring "Highlight current line" %{
+    try %{ remove-highlighter window/line }
+    try %{ add-highlighter window/line line %val{cursor_line} line }
+}
+hook global RawKey .+ highlight-line
 
 
 # ==============================================================================
