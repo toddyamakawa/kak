@@ -1,5 +1,16 @@
 
 # ==============================================================================
+# SETUP
+# ==============================================================================
+nop %sh{
+	if [[ ! -d "$kak_config/autoload/default" ]]; then
+		kakdir="$(dirname "$(dirname "$(which kak)")")"
+		ln -s "$kakdir/share/kak/autoload" "$kak_config/autoload/default"
+	fi
+}
+
+
+# ==============================================================================
 # PLUGINS
 # ==============================================================================
 declare-option -docstring "plug.kak" str plugkak "%val{config}/plugins/plug.kak/rc/plug.kak"
