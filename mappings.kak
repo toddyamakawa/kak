@@ -5,6 +5,10 @@
 # <ret> to open command prompt
 map global normal <ret> :
 
+# Searching
+# Case-insensitive search by default
+map global normal / /(?i)
+
 # Comments
 map global normal '#' ': comment-line<ret>' -docstring 'comment line'
 map global normal '^' 's^<ret>'
