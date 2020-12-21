@@ -29,6 +29,9 @@ plug 'delapouite/kakoune-palette'
 # ==============================================================================
 # COLORS
 # ==============================================================================
+# Default color scheme:
+# https://github.com/mawww/kakoune/blob/master/colors/default.kak
+
 # Color palette
 declare-option str 'black'  'rgb:181818'
 declare-option str 'gray'   'rgb:505050'
@@ -45,23 +48,27 @@ declare-option str 'pink'   'rgb:ff79c6'
 # Builtin faces
 set-face global Default "%opt{white},%opt{black}"
 
-set-face global attribute "%opt{green}"
+set-face global attribute "%opt{yellow}"
 # echo
 set-face global builtin   "%opt{blue}+b"
 set-face global comment   'rgb:707070'
+set-face global identifier "%opt{red}"
+
 set-face global keyword   "%opt{cyan}"
 # #include <...>
 set-face global meta      "%opt{cyan}"
+# <stdlib.h>
+set-face global module    "%opt{red}+b"
 set-face global operator  "%opt{orange}"
-set-face global string    "%opt{yellow}"
+set-face global string    "%opt{green}"
 set-face global value     "%opt{green}"
 set-face global variable  "%opt{red}"
 set-face global type      "%opt{purple}"
 
 set-face global MatchingChar "%opt{orange}"
 
+# TODO: Add these
 #set-face global function "%opt{red}"
-#set-face global module "%opt{red}"
 
 # Markup
 # set-face global title "%opt{red}+b"
@@ -73,7 +80,6 @@ set-face global block "%opt{green}"
 set-face global link "%opt{purple}"
 set-face global bullet "%opt{orange}"
 set-face global list "%opt{orange}+b"
-
 
 # Menu/completion
 set-face global MenuForeground "rgb:606060,%opt{yellow}"
@@ -108,6 +114,25 @@ hook global WinSetOption filetype=.* %{
 	add-highlighter window/whitespace regex '\h+' "0:Whitespace"
 }
 
+# MACROS or Names
+add-highlighter global/ regex '\b[_A-Z]+\b' "0:%opt{red}"
+add-highlighter global/ regex '\b_*[A-Z][_a-z]+\b' "0:%opt{orange}"
+
+# function() definitions and calls
+add-highlighter global/ regex '^\s*def\s+(\w+)' "1:%opt{yellow}"
+add-highlighter global/ regex '\b(\w+)\(' "1:%opt{yellow}"
+add-highlighter global/ regex '\.(\w+)' "1:%opt{yellow}"
+
+# Numbers
+add-highlighter global/ regex '\b(\d{1,3})(\d{3})+\b' "1:default+b"
+add-highlighter global/ regex '\b\d+\b' "0:%opt{red}"
+
+# Comments
+add-highlighter global/ regex '\b(TODO|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
+
+# Searching
+add-highlighter global/ dynregex '%reg{/}' '0:+u'
+
 # EOF tildas
 set-face global BufferPadding 'rgb:505050,default'
 
@@ -129,6 +154,9 @@ set-option global tabstop 4
 set-option global indentwidth 0
 
 set-option global scrolloff '3,7'
+
+# Assistant (clippy, cat, dilbert, none)
+set-option global ui_options ncurses_assistant=cat
 
 
 # ==============================================================================
