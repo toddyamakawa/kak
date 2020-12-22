@@ -138,7 +138,7 @@ add-highlighter global/ regex '\b(\d{1,3})(\d{3})+\b' "1:default+b"
 add-highlighter global/ regex '\b\d+\b' "0:%opt{red}"
 
 # Comments
-add-highlighter global/ regex '\b(TODO|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
+add-highlighter global/ regex '\b(TODO|REVISIT|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
 
 # Searching
 add-highlighter global/ dynregex '%reg{/}' '0:+u'
