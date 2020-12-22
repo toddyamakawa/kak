@@ -58,7 +58,9 @@ declare-option str 'pink'   'rgb:ff79c6'
 
 # Builtin faces
 set-face global Default "%opt{white},%opt{black}"
+set-face global Error   "%opt{black},%opt{red}"
 
+# Code -------------------------------------------------------------------------
 set-face global attribute "%opt{yellow}"
 # echo
 set-face global builtin   "%opt{blue}+b"
@@ -81,7 +83,7 @@ set-face global MatchingChar "%opt{orange}"
 # TODO: Add these
 #set-face global function "%opt{red}"
 
-# Markup
+# Markup -----------------------------------------------------------------------
 # set-face global title "%opt{red}+b"
 set-face global header "%opt{yellow}+b"
 # set-face global italic "%opt{green}"
@@ -155,6 +157,15 @@ define-command -hidden highlight-line -docstring "Highlight current line" %{
     try %{ add-highlighter window/line line %val{cursor_line} line }
 }
 hook global RawKey .+ highlight-line
+
+# Focus events
+hook global FocusIn .* %{
+	set-face global Default "%opt{white},%opt{black}"
+}
+hook global FocusOut .* %{
+	set-face global Default 'rgb:c0c0c0,rgb:000000'
+}
+
 
 
 # ==============================================================================
