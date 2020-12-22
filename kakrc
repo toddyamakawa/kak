@@ -66,7 +66,7 @@ set-face global attribute "%opt{yellow}"
 set-face global builtin   "%opt{blue}+b"
 set-face global comment   'rgb:707070'
 set-face global identifier "%opt{red}"
-
+set-face global function  "%opt{red}+b"
 set-face global keyword   "%opt{cyan}"
 # #include <...>
 set-face global meta      "%opt{cyan}"
@@ -79,9 +79,6 @@ set-face global variable  "%opt{red}"
 set-face global type      "%opt{purple}"
 
 set-face global MatchingChar "%opt{orange}"
-
-# TODO: Add these
-#set-face global function "%opt{red}"
 
 # Markup -----------------------------------------------------------------------
 # set-face global title "%opt{red}+b"
