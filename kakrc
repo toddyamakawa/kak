@@ -44,21 +44,28 @@ plug 'delapouite/kakoune-palette'
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
 
 # Color palette
-declare-option str 'black'  'rgb:181818'
-declare-option str 'gray'   'rgb:505050'
-declare-option str 'white'  'rgb:f0f0f0'
-declare-option str 'red'    'rgb:ff8080'
-declare-option str 'orange' 'rgb:ffb060'
-declare-option str 'yellow' 'rgb:f0f090'
-declare-option str 'green'  'rgb:50f080'
-declare-option str 'blue'   'rgb:9090f0'
-declare-option str 'cyan'   'rgb:90f0f0'
-declare-option str 'purple' 'rgb:c090f0'
-declare-option str 'pink'   'rgb:ff79c6'
+declare-option str 'black'     'rgb:181818'
+declare-option str 'gray'      'rgb:505050'
+declare-option str 'white'     'rgb:f0f0f0'
+declare-option str 'red'       'rgb:ff8080'
+declare-option str 'orange'    'rgb:ffb060'
+declare-option str 'yellow'    'rgb:f0f090'
+declare-option str 'green'     'rgb:50f080'
+declare-option str 'blue'      'rgb:9090f0'
+declare-option str 'blue_dark' 'rgb:4040f0'
+declare-option str 'cyan'      'rgb:90f0f0'
+declare-option str 'purple'    'rgb:c090f0'
+declare-option str 'pink'      'rgb:ff79c6'
 
 # Builtin faces
-set-face global Default "%opt{white},%opt{black}"
-set-face global Error   "%opt{black},%opt{red}"
+set-face global Default            "%opt{white},%opt{black}"
+set-face global PrimaryCursor      "%opt{black},%opt{white}"
+set-face global PrimarySelection   "%opt{white},%opt{blue_dark}"
+set-face global PrimaryCursorEol   "%opt{black},%opt{white}"
+set-face global SecondaryCursor    "%opt{black},%opt{white}"
+set-face global SecondarySelection "%opt{white},%opt{blue_dark}"
+set-face global SecondaryCursorEol "%opt{black},%opt{white}"
+set-face global Error              "%opt{black},%opt{red}"
 
 # Code -------------------------------------------------------------------------
 set-face global attribute "%opt{yellow}"
@@ -126,7 +133,7 @@ hook global WinSetOption filetype=.* %{
 
 # MACROS or Names
 add-highlighter global/ regex '\b[_A-Z]+\b' "0:%opt{red}"
-add-highlighter global/ regex '\b_*[A-Z][_a-z]+\b' "0:%opt{orange}"
+add-highlighter global/ regex '\b_*([A-Z][_a-z]+)+\b' "0:%opt{orange}"
 
 # function() definitions and calls
 add-highlighter global/ regex '^\s*def\s+(\w+)' "1:%opt{yellow}"
@@ -163,6 +170,10 @@ hook global FocusOut .* %{
 	set-face global Default 'rgb:c0c0c0,rgb:000000'
 }
 
+# TODO: Create statusbar scrollbar
+# %val{window_range}
+# list of coordinates and dimensions of the buffer-space available on the current window
+# format: <coord_x> <coord_y> <width> <height>
 
 
 # ==============================================================================
