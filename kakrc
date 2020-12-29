@@ -131,9 +131,13 @@ hook global WinSetOption filetype=.* %{
 	add-highlighter window/whitespace regex '\h+' "0:Whitespace"
 }
 
-# MACROS or Names
-add-highlighter global/ regex '\b[_A-Z]+\b' "0:%opt{red}"
+# MACROS, Names, g_, specific strings
+add-highlighter global/ regex '\b[A-Z][_0-9A-Z]+\b' "0:%opt{orange}+b"
 add-highlighter global/ regex '\b_*([A-Z][_a-z]+)+\b' "0:%opt{orange}"
+add-highlighter global/ regex '\bg_\w+\b' "0:%opt{orange}"
+add-highlighter global/ regex '\b(DEBUG|INFO|Info)\b' "0:%opt{cyan}+b"
+add-highlighter global/ regex '\b(ERROR|FATAL|CRITICAL)\b' "0:%opt{red}+b"
+add-highlighter global/ regex '\b(TODO|REVISIT|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
 
 # function() definitions and calls
 add-highlighter global/ regex '^\s*def\s+(\w+)' "1:%opt{yellow}"
@@ -143,9 +147,7 @@ add-highlighter global/ regex '\.(\w+)' "1:%opt{yellow}"
 # Numbers
 add-highlighter global/ regex '\b(\d{1,3})(\d{3})+\b' "1:default+b"
 add-highlighter global/ regex '\b\d+\b' "0:%opt{red}"
-
-# Comments
-add-highlighter global/ regex '\b(TODO|REVISIT|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
+add-highlighter global/ regex '\b(0x)?[_0-9a-fA-F]{4,}\b' "0:%opt{red}"
 
 # Searching
 add-highlighter global/ dynregex '%reg{/}' '0:+u'
