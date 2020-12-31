@@ -1,5 +1,31 @@
 
-# map global normal O "<a-;>"
+# ==============================================================================
+# REFERENCE
+# ==============================================================================
+# https://discuss.kakoune.com/t/special-key-codes/1506
+#
+# Return    -> ret
+# Space     -> space
+# Tab       -> tab
+# <         -> lt
+# >         -> gt
+# Backspace -> backspace
+# Escape    -> esc
+# Up        -> up
+# Down      -> down
+# Left      -> left
+# Right     -> right
+# Page Up   -> pageup
+# Page Down -> pagedown
+# Home      -> home
+# End       -> end
+# Insert    -> ins
+# Delete    -> del
+# +         -> plus
+# -         -> minus
+# ;         -> semicolon
+# %         -> percent
+
 
 # ==============================================================================
 # NORMAL
@@ -19,6 +45,20 @@ map global normal '^' 's^<ret>'
 # Swap 'Q' and 'q' so I don't accidentally run a macro
 map global normal q Q
 map global normal Q q
+
+# Marks
+# declare-user-mode set-mark
+# map global normal M ': enter-user-mode set-mark<ret>'
+# map global set-mark a ': set-mark a<ret>'
+# define-command set-mark -docstring "set-mark [<register>]: save selection to <register>" -params 1 %{
+# 	execute-keys %sh{ echo '"'"$1"Z }
+# }
+# declare-user-mode restore-mark
+# map global normal m ': enter-user-mode restore-mark<ret>'
+# map global restore-mark a ': restore-mark a<ret>'
+# define-command restore-mark -docstring "restore-mark [<register>]: restore selection from <register>" -params 1 %{
+# 	execute-keys %sh{ echo '"'"$1"z }
+# }
 
 # Register
 map global normal R '"'
@@ -64,4 +104,6 @@ exec -draft hH <a-k>jj<ret> d
 # ==============================================================================
 map global view q '<esc>'
 
+
+# map global normal "<a-lt>" x
 
