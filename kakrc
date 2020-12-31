@@ -50,6 +50,9 @@ set-option global scrolloff '3,7'
 # Assistant (clippy, cat, dilbert, none)
 set-option global ui_options ncurses_assistant=cat
 
+# Status-line
+set-option global ui_options ncurses_status_on_top=yes
+
 
 # ==============================================================================
 # ALIASES/COMMANDS

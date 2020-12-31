@@ -36,6 +36,22 @@ set-face global SecondarySelection "%opt{white},%opt{blue_dark}"
 set-face global SecondaryCursorEol "%opt{black},%opt{white}"
 set-face global Error              "%opt{black},%opt{red}"
 
+# https://github.com/mawww/kakoune/wiki/Status-line
+# Default: %val{bufname} %val{cursor_line}:%val{cursor_char_column} {{context_info}} {{mode_info}} - %val{client}@[%val{session}]
+# TODO: Add scrollbar
+# TODO: Add percentage position
+# TODO: Git integration?
+declare-option str 'modeline_pos' '{%opt{yellow},%opt{gray}+b}%val{cursor_line},%val{cursor_char_column}{default,default}'
+declare-option str 'modeline_bufname' '{%opt{white}}[%val{bufname}]{default,default}'
+declare-option str 'modeline_session' '{%opt{purple}}[%val{client}@%val{session}]{default,default}'
+set global modelinefmt "%opt{modeline_pos} {{mode_info}} %opt{modeline_bufname}{{context_info}}%opt{modeline_session}"
+
+set-face global StatusCursor    "%opt{black},%opt{white}"
+set-face global StatusLine      "%opt{cyan},%opt{gray}"
+set-face global StatusLineInfo  "%opt{green}+b"
+set-face global StatusLineMode  "%opt{gray},%opt{yellow}+b"
+set-face global StatusLineValue "%opt{gray},%opt{cyan}+b"
+
 # Code -------------------------------------------------------------------------
 set-face global attribute "%opt{yellow}"
 # echo
