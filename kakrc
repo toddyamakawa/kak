@@ -70,7 +70,9 @@ define-command do -docstring 'Evaluate selection' %{
 define-command sbf -docstring 'set buffer filetype' -params .. %{
 	set buffer filetype %arg{@}
 }
-
+define-command sft -docstring 'set buffer filetype' -params .. %{
+	set buffer filetype %arg{@}
+}
 
 # ==============================================================================
 # MAPPINGS
