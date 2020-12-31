@@ -1,5 +1,4 @@
 
-
 # ==============================================================================
 # ALT
 # ==============================================================================
@@ -19,19 +18,22 @@ evaluate-commands %sh{
 # SELECT-MODE
 # ==============================================================================
 declare-user-mode select-mode
-map global normal m ': enter-user-mode select-mode<ret>'
+map global normal <space> ': enter-user-mode select-mode<ret>'
+map global select-mode <space> <space> -docstring '<space>'
 
 
 # ==============================================================================
 # PARAGRAPH
 # ==============================================================================
+# TODO: Make up vs. down selection more consistent
+# TODO: Add move up/down
 declare-user-mode paragraph
 map global select-mode p ']p[p: enter-user-mode -lock paragraph<ret>' -docstring 'paragraph'
 map global paragraph L '>'      -docstring 'move left'
 map global paragraph H '<'      -docstring 'move right'
 map global paragraph j ']p]p[p' -docstring 'select down'
 map global paragraph k '[p'     -docstring 'select up'
-map global paragraph d d        -docstring 'delete'
+map global paragraph d 'd]p[p'  -docstring 'delete'
 map global paragraph y y        -docstring 'yank'
 map global paragraph q '<esc>'
 
