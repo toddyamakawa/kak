@@ -55,7 +55,7 @@ declare-option str 'blue'      'rgb:9090f0'
 declare-option str 'blue_dark' 'rgb:4040f0'
 declare-option str 'cyan'      'rgb:90f0f0'
 declare-option str 'purple'    'rgb:c090f0'
-declare-option str 'pink'      'rgb:ff79c6'
+declare-option str 'pink'      'rgb:ffa0d0'
 
 # Builtin faces
 set-face global Default            "%opt{white},%opt{black}"
@@ -104,7 +104,7 @@ set-face global MenuBackground "%opt{yellow},rgb:606060"
 set-face global MenuInfo       "%opt{yellow},rgb:606060"
 
 # Assistant/[+]
-set-face global Information "%opt{green},rgb:404040"
+set-face global Information "%opt{pink},rgb:404040"
 
 # Line numbers
 # :addhl window wrap
