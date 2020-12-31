@@ -47,21 +47,22 @@ map global normal q Q
 map global normal Q q
 
 # Marks
-# declare-user-mode set-mark
-# map global normal M ': enter-user-mode set-mark<ret>'
-# map global set-mark a ': set-mark a<ret>'
-# define-command set-mark -docstring "set-mark [<register>]: save selection to <register>" -params 1 %{
-# 	execute-keys %sh{ echo '"'"$1"Z }
-# }
-# declare-user-mode restore-mark
-# map global normal m ': enter-user-mode restore-mark<ret>'
-# map global restore-mark a ': restore-mark a<ret>'
-# define-command restore-mark -docstring "restore-mark [<register>]: restore selection from <register>" -params 1 %{
-# 	execute-keys %sh{ echo '"'"$1"z }
-# }
-
-# Register
-map global normal R '"'
+map global normal M ': mark-set<ret>'
+map global normal m ': mark-goto<ret>'
+define-command -hidden mark-set %{
+	info 'save mark in <register>'
+	on-key %{
+		try %{
+			execute-keys %{"} %val{key} Z
+		} catch %{
+			fail "Unable to save to register '%val{key}'"
+		}
+	}
+}
+define-command -hidden mark-goto %{
+	info 'restore mark in <register>'
+	on-key %{ execute-keys %{"} %val{key} z }
+}
 
 # HACK: Scrolling
 # hook global RawKey <scroll:-?\d+> %{echo %val{key}}
