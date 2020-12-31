@@ -197,10 +197,16 @@ set-option global ui_options ncurses_assistant=cat
 
 alias global bd delete-buffer
 
+
 #define-command -params 1 -file-completion -docstring 'executes mkdir -p' mkdir %{
 #	nop %sh{ mkdir -p "$1" }
 #}
-define-command do %{ eval %val{selection} }
+define-command do -docstring 'Evaluate selection' %{
+	eval %val{selection}
+}
+define-command sbf -docstring 'set buffer filetype' -params .. %{
+	set buffer filetype %arg{@}
+}
 
 
 # ==============================================================================
