@@ -25,16 +25,17 @@ map global select-mode <space> <space> -docstring '<space>'
 # ==============================================================================
 # PARAGRAPH
 # ==============================================================================
-# TODO: Make up vs. down selection more consistent
-# TODO: Add move up/down
 declare-user-mode paragraph
-map global select-mode p ']p[p: enter-user-mode -lock paragraph<ret>' -docstring 'paragraph'
-map global paragraph L '>'      -docstring 'move left'
-map global paragraph H '<'      -docstring 'move right'
-map global paragraph j ']p]p[p' -docstring 'select down'
-map global paragraph k '[p'     -docstring 'select up'
-map global paragraph d 'd]p[p'  -docstring 'delete'
-map global paragraph y y        -docstring 'yank'
+declare-option str 'paragraph_select' '<a-a>pj[p'
+map global select-mode p "%opt{paragraph_select}: enter-user-mode -lock paragraph<ret>" -docstring 'paragraph'
+map global paragraph L '>'                              -docstring 'move left'
+map global paragraph H '<'                              -docstring 'move right'
+map global paragraph K "d[pP[p%opt{paragraph_select}"   -docstring 'move up'
+map global paragraph J "d]pp]p[p%opt{paragraph_select}" -docstring 'move down'
+map global paragraph j "]p%opt{paragraph_select}"       -docstring 'select down'
+map global paragraph k "[p%opt{paragraph_select}"       -docstring 'select up'
+map global paragraph d "d%opt{paragraph_select}"        -docstring 'delete'
+map global paragraph y y                                -docstring 'yank'
 map global paragraph q '<esc>'
 
 
