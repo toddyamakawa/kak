@@ -42,7 +42,7 @@ set-face global Error              "%opt{black},%opt{red}"
 # TODO: Add percentage position
 # TODO: Git integration?
 declare-option str 'modeline_pos' '{%opt{yellow},%opt{gray}+b}%val{cursor_line},%val{cursor_char_column}{default,default}'
-declare-option str 'modeline_bufname' '{%opt{white}}[%val{bufname}]{default,default}'
+declare-option str 'modeline_bufname' '{%opt{white}}[%val{bufname}]{%opt{cyan}+b}[%opt{filetype}]{default,default}'
 declare-option str 'modeline_session' '{%opt{purple}}[%val{client}@%val{session}]{default,default}'
 set global modelinefmt "%opt{modeline_pos} {{mode_info}} %opt{modeline_bufname}{{context_info}}%opt{modeline_session}"
 
