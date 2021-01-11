@@ -1,5 +1,11 @@
 
 # ==============================================================================
+# EXAMPLES
+# ==============================================================================
+# https://github.com/mawww/kakoune/wiki/Registers---Clipboard
+# https://github.com/andreyorst/dotfiles/blob/187ebb84f9542b76a4f3c3e08f9533cd8187faa1/.config/kak/mappings.kak#L28-L33
+
+# ==============================================================================
 # COPY
 # ==============================================================================
 declare-option str 'clipboard_copy' %sh{
@@ -8,9 +14,7 @@ declare-option str 'clipboard_copy' %sh{
 		Darwin) echo "pbcopy";;
 	esac
 }
-# info "%opt{clipboard_copy}"
-map global user P "!%opt{clipboard_paste}<ret>"     -docstring 'paste (before) from clipboard'
-map global user p "<a-!>%opt{clipboard_paste}<ret>" -docstring 'paste (after) from clipboard'
+map global normal Y "<a-|> %opt{clipboard_copy}<ret>"
 
 
 # ==============================================================================
@@ -24,8 +28,12 @@ declare-option str 'clipboard_paste' %sh{
 	esac
 }
 # info "%opt{clipboard_paste}"
+map global user P "!%opt{clipboard_paste}<ret>"     -docstring 'paste (before) from clipboard'
+map global user p "<a-!>%opt{clipboard_paste}<ret>" -docstring 'paste (after) from clipboard'
+
 
 # printf "map global user -docstring 'yank to primary' y '<a-|>%s<ret>:echo -markup %%{{information}copied selection to x11 primary}<ret>'\n" "$copy"
+
 # printf "map global user -docstring 'yank to clipboard' y '<a-|>%s<ret>:echo -markup %%{{information}copied selection to x11 clipboard}<ret>'\n" "$copy -selection clipboard"
 # printf "map global user -docstring 'replace from clipboard' r '|%s<ret>'\n" "$paste"
 
