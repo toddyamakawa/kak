@@ -101,10 +101,12 @@ exec -draft hH <a-k>jj<ret> d
 
 # <tab/<s-tab> for completion
 hook global InsertCompletionShow .* %{
+	map window insert <ret> <c-o>
 	map window insert <tab> <c-n>
 	map window insert <s-tab> <c-p>
 }
 hook global InsertCompletionHide .* %{
+	unmap window insert <ret>
 	unmap window insert <tab>
 	unmap window insert <s-tab>
 }
