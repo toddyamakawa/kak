@@ -39,7 +39,16 @@ map global normal / /(?i)
 
 # Comments
 map global normal '#' ': comment-line<ret>' -docstring 'comment line'
+
+# Cursors
 map global normal '^' 's^<ret>'
+
+# Selection
+map global normal x <a-x>
+
+# Editing
+map global normal I '<a-s>I'
+map global normal A '<a-s>A'
 
 # Macros
 # Swap 'Q' and 'q' so I don't accidentally run a macro
@@ -118,5 +127,12 @@ hook global InsertCompletionHide .* %{
 map global view q '<esc>'
 
 
-# map global normal "<a-lt>" x
+# ==============================================================================
+# GOTO
+# ==============================================================================
+# TODO: Figure out why this map works in 'normal' but not 'goto'
+#map global goto <gt> ': buffer-next<ret>'
+#map global normal <gt> ': buffer-next<ret>'
+
+#map global normal "<a-lt>" x
 
