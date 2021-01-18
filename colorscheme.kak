@@ -42,7 +42,7 @@ set-face global Error              "%opt{black},%opt{red}"
 # TODO: Add percentage position
 # TODO: Git integration?
 declare-option str 'modeline_pos' '{%opt{yellow},%opt{gray}+b}%val{cursor_line},%val{cursor_char_column}{default,default}'
-declare-option str 'modeline_bufname' '{%opt{white}}[%val{bufname}]{%opt{cyan}+b}[%opt{filetype}]{default,default}'
+declare-option str 'modeline_bufname' '{%opt{white}+b}[%val{bufname}]{%opt{cyan}+b}[%opt{filetype}]{default,default}'
 declare-option str 'modeline_session' '{%opt{purple}}[%val{client}@%val{session}]{default,default}'
 set global modelinefmt "%opt{modeline_pos} {{mode_info}} %opt{modeline_bufname}{{context_info}}%opt{modeline_session}"
 
@@ -145,6 +145,8 @@ add-highlighter global/ regex '\b(0x)?[_0-9a-fA-F]{4,}\b' "0:%opt{green}"
 
 # Searching
 add-highlighter global/ dynregex '%reg{/}' '0:+u'
+# TODO: Highlight word under cursor
+# https://github.com/mawww/config/blob/d841453cc71f3ab8cbe19ac5036cd86807590617/kakrc#L40-L54
 
 
 # ==============================================================================
