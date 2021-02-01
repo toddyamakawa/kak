@@ -35,13 +35,13 @@ define-command vim-map-visual-both -params 1 %{
 
 # define-command vim-map-visual -params 1 %{
 
+# Selection
 map global vim-visual a <a-a> -docstring 'select surrounding object'
 map global vim-visual i <a-i> -docstring 'select inner object'
 
 # Commands
 map global vim-visual u ` -docstring 'lowercase'
 map global vim-visual U ~ -docstring 'uppercase'
-map global vim-visual o <a-semicolon> -docstring 'otherside'
 
 # Navigation
 # HACK: Implemented like this  until this GitHub issue is fixed:
@@ -49,12 +49,14 @@ map global vim-visual o <a-semicolon> -docstring 'otherside'
 map global vim-visual h 'H:     enter-vim-visual-mode<ret>'
 map global vim-visual H 'Gh:    enter-vim-visual-mode<ret>'
 map global vim-visual j 'J:     enter-vim-visual-mode<ret>'
-map global vim-visual J 'C:     enter-vim-visual-mode<ret>'
+#map global vim-visual J 'C:     enter-vim-visual-mode<ret>'
 map global vim-visual k 'K:     enter-vim-visual-mode<ret>'
-map global vim-visual K '<a-C>: enter-vim-visual-mode<ret>'
+#map global vim-visual K '<a-C>: enter-vim-visual-mode<ret>'
 map global vim-visual l 'L:     enter-vim-visual-mode<ret>'
 map global vim-visual L 'Gl:    enter-vim-visual-mode<ret>'
+map global vim-visual o '<a-semicolon>: enter-vim-visual-mode<ret>'  -docstring 'otherside'
 
+vim-map-visual-both b
 vim-map-visual-both e
 vim-map-visual-both f
 #vim-map-visual-both g
