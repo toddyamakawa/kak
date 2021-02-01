@@ -40,15 +40,27 @@ map global normal / /(?i)
 # Comments
 map global normal '#' ': comment-line<ret>' -docstring 'comment line'
 
-# Cursors
-map global normal '^' 's^<ret>'
+# Movement
+map global normal B <a-b>
+map global normal E <a-e>
+map global normal F <a-f>
+map global normal N <a-n>
+map global normal T <a-t>
+map global normal W <a-w>
 
 # Selection
+map global normal '^' 's^<ret>'
 map global normal x <a-x>
+map global normal J C
+map global normal K <a-C>
 
 # Editing
 map global normal I '<a-s>I'
 map global normal A '<a-s>A'
+map global normal C '<semicolon>Glc'
+map global normal D '<semicolon>Gld'
+map global normal i '<semicolon>i'
+map global normal a '<semicolon>a'
 
 # Macros
 # Swap 'Q' and 'q' so I don't accidentally run a macro
