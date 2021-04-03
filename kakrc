@@ -44,8 +44,12 @@ source "%val{config}/colorscheme.kak"
 
 set-option global tabstop 4
 set-option global indentwidth 0
+# Expand tabs
+#set-option global aligntab true
 
 set-option global scrolloff '3,7'
+
+#set-option global comment_line '###'
 
 # Assistant (clippy, cat, dilbert, none)
 set-option global ui_options ncurses_assistant=cat
@@ -53,6 +57,12 @@ set-option global ui_options ncurses_assistant=cat
 # Status-line
 set-option global ui_options ncurses_status_on_top=yes
 
+# TODO: Figure out if this has any other negative side-effects
+# https://discuss.kakoune.com/t/disable-comment-on-newline/393/9
+# Disable comment on new line
+set-option global disabled_hooks '.*-insert'
+
+#source "%val{config}/filetype.kak"
 
 # ==============================================================================
 # ALIASES/COMMANDS
