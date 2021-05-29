@@ -51,32 +51,42 @@ hook global ModeChange push:[^:]*:next-key\[user.spell\] %{
 # PARAGRAPH
 # ==============================================================================
 declare-user-mode paragraph
-declare-option str 'paragraph_select' '<a-a>pj[p'
-map global select-mode p "%opt{paragraph_select}: enter-user-mode -lock paragraph<ret>" -docstring 'paragraph'
-map global paragraph L '>'                              -docstring 'move left'
-map global paragraph H '<'                              -docstring 'move right'
-map global paragraph K "d[pP[p%opt{paragraph_select}"   -docstring 'move up'
-map global paragraph J "d]pp]p[p%opt{paragraph_select}" -docstring 'move down'
-map global paragraph j "]p%opt{paragraph_select}"       -docstring 'select down'
-map global paragraph k "[p%opt{paragraph_select}"       -docstring 'select up'
-map global paragraph d "d%opt{paragraph_select}"        -docstring 'delete'
-map global paragraph y y                                -docstring 'yank'
-map global paragraph q '<esc>'
+declare-option str 'paragraph_select' ']pj[p'
+map global select-mode p ": enter-user-mode -lock paragraph<ret>" -docstring 'paragraph'
+map global paragraph L "%opt{paragraph_select}>;"                              -docstring 'move left'
+map global paragraph H "%opt{paragraph_select}<;"                              -docstring 'move right'
+map global paragraph K "%opt{paragraph_select}d[pP[p;"   -docstring 'move up'
+map global paragraph J "%opt{paragraph_select}d]pp]p[p;" -docstring 'move down'
+map global paragraph j "]pj"                            -docstring 'select down'
+map global paragraph k "[p;"                            -docstring 'select up'
+map global paragraph d "%opt{paragraph_select}d"        -docstring 'delete'
+map global paragraph y "%opt{paragraph_select}y"        -docstring 'yank'
+map global paragraph v "%opt{paragraph_select}: fail <ret>" -docstring 'select'
+map global paragraph q ': fail<ret>'                    -docstring 'quit'
 
 
 # ==============================================================================
 # LINE
 # ==============================================================================
 declare-user-mode line
-map global select-mode l 'gllGh: enter-user-mode -lock line<ret>' -docstring 'line'
-map global line H '<'          -docstring 'move right'
-map global line J "dpjgllGh"   -docstring 'move down'
-map global line K 'dkkpjgllGh' -docstring 'move up'
-map global line L '>'          -docstring 'move left'
-map global line j 'jgllGh'     -docstring 'select down'
-map global line k 'kgllGh'     -docstring 'select up'
-map global line d d            -docstring 'delete'
-map global line y y            -docstring 'yank'
-map global line q '<esc>'
+map global select-mode l 'gh: enter-user-mode -lock line<ret>' -docstring 'line'
+map global line H '<'           -docstring 'move right'
+map global line J 'xdpj'        -docstring 'move down'
+map global line K 'xdkkpj'      -docstring 'move up'
+map global line L '>'           -docstring 'move left'
+map global line j 'jgh'         -docstring 'select down'
+map global line k 'kgh'         -docstring 'select up'
+map global line d 'xd'          -docstring 'delete'
+map global line y 'xygh'        -docstring 'yank'
+map global line q ': fail<ret>' -docstring 'quit'
 
+
+# ==============================================================================
+# EXIT
+# ==============================================================================
+declare-user-mode exit
+map global select-mode q ': enter-user-mode exit<ret>' -docstring 'exit'
+map global exit a ': write-all-quit<ret>' -docstring 'write-all-quit'
+map global exit w ': write-quit!<ret>' -docstring 'write-quit!'
+map global exit q ': quit!<ret>'       -docstring 'quit!'
 
