@@ -15,7 +15,7 @@ declare-option str 'white'     'rgb:f0f0f0'
 declare-option str 'red'       'rgb:ff8080'
 declare-option str 'orange'    'rgb:ffa080'
 declare-option str 'yellow'    'rgb:f0f090'
-declare-option str 'green'     'rgb:80f080'
+declare-option str 'green'     'rgb:90f090'
 declare-option str 'blue'      'rgb:9090f0'
 declare-option str 'blue_dark' 'rgb:4040f0'
 declare-option str 'cyan'      'rgb:90f0f0'
@@ -125,23 +125,23 @@ hook global WinSetOption filetype=.* %{
 }
 
 # MACROS, Names, g_, specific strings
-add-highlighter global/ regex '\b[A-Z][_0-9A-Z]+\b' "0:%opt{orange}+b"
-add-highlighter global/ regex '\b_*([A-Z][_a-z]+)+\b' "0:%opt{orange}"
-add-highlighter global/ regex '\bg_\w+\b' "0:%opt{orange}"
+add-highlighter global/ regex '\b[A-Z][_0-9A-Z]+\b' "0:%opt{purple}+b"
+add-highlighter global/ regex '\b_*([A-Z][_a-z]+)+\b' "0:%opt{purple}"
+add-highlighter global/ regex '\bg_\w+\b' "0:%opt{purple}"
 add-highlighter global/ regex '\b(DEBUG|INFO|Info)\b' "0:%opt{cyan}+b"
 add-highlighter global/ regex '(?S)^.*(ERROR|FATAL|CRITICAL).*$' "0:%opt{red}+b"
 add-highlighter global/ regex '\b(TODO|REVISIT|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
 
-
 # function() definitions and calls
 add-highlighter global/ regex '^\s*def\s+(\w+)' "1:%opt{yellow}"
 add-highlighter global/ regex '\b(\w+)\(' "1:%opt{yellow}"
-add-highlighter global/ regex '(\w+)(\.\w+)+' "0:%opt{yellow}"
+add-highlighter global/ regex '(\w+)(\.\w+)+' "1:%opt{orange}"
+add-highlighter global/ regex '(\w+)(\.\w+)+' "2:%opt{yellow}"
 
 # Numbers
 add-highlighter global/ regex '\b(\d{1,3})(\d{3})+\b' "1:default+b"
-add-highlighter global/ regex '\b\d+\b' "0:%opt{green}"
-add-highlighter global/ regex '\b(0x)?[_0-9a-fA-F]{4,}\b' "0:%opt{green}"
+add-highlighter global/ regex '\b\d+\b' "0:%opt{red}"
+add-highlighter global/ regex '\b(0x)?[_0-9a-fA-F]{4,}\b' "0:%opt{red}"
 
 # Searching
 add-highlighter global/ dynregex '%reg{/}' '0:+u'
