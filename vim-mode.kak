@@ -9,6 +9,7 @@ map global vim-normal v ': enter-user-mode vim-visual<ret>' -docstring 'visual m
 map global vim-normal a 'lha'
 map global vim-normal n n
 map global vim-normal N '<a-n>'
+map global vim-normal q ': fail<ret>'  -docstring 'quit'
 
 
 # ==============================================================================
@@ -66,4 +67,6 @@ vim-map-visual-both w
 
 # map global normal <space> lh<space>
 # map global normal g G
+
+map global vim-visual q ': fail<ret>'  -docstring 'quit'
 
