@@ -90,5 +90,6 @@ define-command sft -docstring 'set buffer filetype' -params .. %{
 #debug mappings
 source "%val{config}/mappings.kak"
 source "%val{config}/user-modes.kak"
+source "%val{config}/vim-mode.kak"
 
 
