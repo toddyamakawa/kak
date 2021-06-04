@@ -49,7 +49,7 @@ map global normal T <a-t>
 map global normal W <a-w>
 
 # Selection
-map global normal '^' 's^<ret>'
+map global normal '^' '<a-s>gi'
 map global normal x <a-x>
 map global normal J C
 map global normal K <a-C>
