@@ -98,7 +98,8 @@ set-face global BufferPadding 'rgb:505050,default'
 # ==============================================================================
 # HIGHLIGHTERS
 # ==============================================================================
-# Line numbers
+
+# Line Numbers -----------------------------------------------------------------
 # :addhl window wrap
 add-highlighter global/ number-lines \
 	-separator '│ '                  \
@@ -109,13 +110,13 @@ set-face global LineNumbers        'rgb:505050,default'
 set-face global LineNumbersWrapped 'rgb:202020,default'
 set-face global LineNumberCursor   "%opt{yellow},default"
 
-# Show whitepace characters
+# Whitespace -------------------------------------------------------------------
 # https://discuss.kakoune.com/t/see-unwanted-characters/843
 add-highlighter global/ show-whitespaces \
 	-lf '⇣'                              \
 	-spc '·'                             \
 	-tab '▸'
-set-face global Whitespace 'rgb:505050,default'
+set-face global Whitespace 'rgb:303030,default'
 
 hook global WinSetOption filetype=.* %{
 	add-highlighter window/trailing-whitespace regex '\h+$' 0:Error
@@ -124,19 +125,18 @@ hook global WinSetOption filetype=.* %{
 	add-highlighter window/ansi regex '\[[;0-9]+m' '0:Whitespace'
 }
 
-# MACROS, Names, g_, specific strings
+# MACROS, Names, g_, specific strings ------------------------------------------
 add-highlighter global/ regex '\b[A-Z][_0-9A-Z]+\b' "0:%opt{purple}+b"
 add-highlighter global/ regex '\b_*([A-Z][_a-z]+)+\b' "0:%opt{purple}"
 add-highlighter global/ regex '\bg_\w+\b' "0:%opt{purple}"
 add-highlighter global/ regex '\b(DEBUG|INFO|Info)\b' "0:%opt{cyan}+b"
-add-highlighter global/ regex '(?S)^.*(ERROR|FATAL|CRITICAL).*$' "0:%opt{red}+b"
+add-highlighter global/ regex '(?S)^.*(ERROR|FATAL|CRITICAL).*$' "0:default+b" "1:%opt{red}+b"
 add-highlighter global/ regex '\b(TODO|REVISIT|FIXME|HACK|XXX|NOTE)\b' '0:default+rb'
 
 # function() definitions and calls
 add-highlighter global/ regex '^\s*def\s+(\w+)' "1:%opt{yellow}"
 add-highlighter global/ regex '\b(\w+)\(' "1:%opt{yellow}"
-add-highlighter global/ regex '(\w+)(\.\w+)+' "1:%opt{orange}"
-add-highlighter global/ regex '(\w+)(\.\w+)+' "2:%opt{yellow}"
+add-highlighter global/ regex '(\w+)(\.\w+)+' "1:%opt{orange}" "2:%opt{yellow}"
 
 # Numbers
 add-highlighter global/ regex '\b(\d{1,3})(\d{3})+\b' "1:default+b"
