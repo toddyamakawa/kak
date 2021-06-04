@@ -22,23 +22,24 @@ evaluate-commands %sh{
 
 
 # ==============================================================================
-# SELECT
+# CHOOSE
 # ==============================================================================
-declare-user-mode select-mode
-map global normal <space> ': enter-user-mode select-mode<ret>'
-map global select-mode <space> <space> -docstring '<space>'
-map global select-mode <semicolon> '<space><semicolon>' -docstring '<space><semicolon>'
+declare-user-mode choose-mode
+map global normal <space> ': enter-user-mode choose-mode<ret>'
+map global choose-mode <space> <space> -docstring '<space>'
+map global choose-mode <semicolon> '<space><semicolon>' -docstring '<space><semicolon>'
 
 
 # ==============================================================================
 # SPELL
 # ==============================================================================
+# TODO: Define a genric "map" and "reenter mode" command
 declare-user-mode spell
 define-command enter-spell-mode %{
 	spell
 	enter-user-mode spell
 }
-map global select-mode s ': enter-spell-mode<ret>'          -docstring 'spell'
+map global choose-mode s ': enter-spell-mode<ret>'          -docstring 'spell'
 map global spell a ': spell-add; enter-spell-mode<ret>'     -docstring 'add to dictionary'
 map global spell n ': spell-next; enter-spell-mode<ret>'    -docstring 'next misspelling'
 map global spell r ': spell-replace; enter-spell-mode<ret>' -docstring 'suggest replacement'
@@ -49,11 +50,22 @@ hook global ModeChange push:[^:]*:next-key\[user.spell\] %{
 
 
 # ==============================================================================
+# SELECT
+# ==============================================================================
+declare-user-mode select
+map global choose-mode s ": enter-user-mode -lock select<ret>" -docstring 'select'
+map global select j ')'                 -docstring 'next'
+map global select k '('                 -docstring 'previous'
+map global select d '<a-space>'         -docstring 'delete'
+map global select <space> ': fail<ret>' -docstring 'leave'
+
+
+# ==============================================================================
 # PARAGRAPH
 # ==============================================================================
 declare-user-mode paragraph
 declare-option str 'paragraph_select' ']pj[p'
-map global select-mode p ": enter-user-mode -lock paragraph<ret>" -docstring 'paragraph'
+map global choose-mode p ": enter-user-mode -lock paragraph<ret>" -docstring 'paragraph'
 map global paragraph j "]pj"                                -docstring 'select down'
 map global paragraph k "[p;"                                -docstring 'select up'
 map global paragraph L "%opt{paragraph_select}>;"           -docstring 'move left'
@@ -70,7 +82,7 @@ map global paragraph <space> ': fail<ret>'                  -docstring 'leave'
 # LINE
 # ==============================================================================
 declare-user-mode line
-map global select-mode l 'gh: enter-user-mode -lock line<ret>' -docstring 'line'
+map global choose-mode l 'gh: enter-user-mode -lock line<ret>' -docstring 'line'
 map global line j 'jgh'    -docstring 'select down'
 map global line k 'kgh'    -docstring 'select up'
 map global line L '>'      -docstring 'move left'
@@ -86,7 +98,7 @@ map global line <space> ': fail<ret>' -docstring 'leave'
 # BUFFER
 # ==============================================================================
 declare-user-mode buffer
-map global select-mode f ': enter-user-mode -lock buffer<ret>' -docstring 'buffer'
+map global choose-mode f ': enter-user-mode -lock buffer<ret>' -docstring 'buffer'
 map global buffer j ': buffer-next<ret>'     -docstring 'buffer-next'
 map global buffer k ': buffer-previous<ret>' -docstring 'buffer-previous'
 map global buffer h 'gk'                     -docstring 'top'
@@ -95,5 +107,6 @@ map global buffer d ': delete-buffer<ret>'   -docstring 'delete-buffer'
 map global buffer x ': write-quit!<ret>'     -docstring 'write-quit!'
 map global buffer w ': write<ret>'           -docstring 'write'
 map global buffer q ': quit!<ret>'           -docstring 'quit!'
+#TODO: map s to run '%s'
 map global buffer <space> ': fail<ret>'      -docstring 'leave'
 
