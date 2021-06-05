@@ -111,18 +111,25 @@ set-face global LineNumbersWrapped 'rgb:202020,default'
 set-face global LineNumberCursor   "%opt{yellow},default"
 
 # Whitespace -------------------------------------------------------------------
-# https://discuss.kakoune.com/t/see-unwanted-characters/843
+set-face global Whitespace 'rgb:303030,default'
+# Set whitespace characters
 add-highlighter global/ show-whitespaces \
 	-lf '⇣'                              \
 	-spc '·'                             \
 	-tab '▸'
-set-face global Whitespace 'rgb:303030,default'
-
+# https://discuss.kakoune.com/t/use-whitespace-face-in-strings/1761/2
+# https://discuss.kakoune.com/t/see-unwanted-characters/843
 hook global WinSetOption filetype=.* %{
-	add-highlighter window/trailing-whitespace regex '\h+$' 0:Error
-	add-highlighter window/newline regex '\n+' "0:Whitespace"
+	try %{ remove-highlighter window/whitespace }
+	try %{ remove-highlighter window/newline }
+	try %{ remove-highlighter window/trailing-whitespace }
+	try %{ remove-highlighter window/ansi }
 	add-highlighter window/whitespace regex '\h+' "0:Whitespace"
+	add-highlighter window/newline regex '\n+' "0:Whitespace"
+	add-highlighter window/trailing-whitespace regex '\h+$' 0:Error
 	add-highlighter window/ansi regex '\[[;0-9]+m' '0:Whitespace'
+	# TODO: Figure out how to hide this character
+	#add-highlighter window/escape str '' '0:Whitespace'
 }
 
 # MACROS, Names, g_, specific strings ------------------------------------------
