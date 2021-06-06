@@ -69,9 +69,9 @@ vim-map-visual-both w
 # map global normal g G
 
 # Command and quit
-map global vim-visual r 'r: fail<ret>' -docstring 'replace'
-map global vim-visual c 'c: fail<ret>' -docstring 'change'
-map global vim-visual d 'd: fail<ret>' -docstring 'delete'
-map global vim-visual y 'y: fail<ret>' -docstring 'yank'
-map global vim-visual q ': fail<ret>'  -docstring 'quit'
+map global vim-visual r 'r' -docstring 'replace'
+map global vim-visual c 'c' -docstring 'change'
+map global vim-visual d 'd' -docstring 'delete'
+map global vim-visual y 'y' -docstring 'yank'
+map global vim-visual <space> ''  -docstring 'leave'
 
