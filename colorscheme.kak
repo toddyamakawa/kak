@@ -5,6 +5,8 @@
 # Default color scheme:
 # https://github.com/mawww/kakoune/blob/master/colors/default.kak
 
+# TODO: https://github.com/caksoylar/kakoune-mysticaltutor
+
 
 # ==============================================================================
 # PALETTE
@@ -111,7 +113,7 @@ set-face global LineNumbersWrapped 'rgb:202020,default'
 set-face global LineNumberCursor   "%opt{yellow},default"
 
 # Whitespace -------------------------------------------------------------------
-set-face global Whitespace 'rgb:303030,default'
+set-face global Whitespace 'rgb:404040,default'
 # Set whitespace characters
 add-highlighter global/ show-whitespaces \
 	-lf '⇣'                              \
